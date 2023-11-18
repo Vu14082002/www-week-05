@@ -39,4 +39,15 @@ public class Address {
         this.street = street;
         this.number = number;
     }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "city='" + city + '\'' +
+                ", country=" + country +
+                ", zipcode='" + zipcode + '\'' +
+                ", street='" + street + '\'' +
+                ", number='" + number + '\'' +
+                '}';
+    }
 }

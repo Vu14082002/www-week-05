@@ -9,11 +9,9 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "candidate")
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class Candidate {
-
     @Id
     @Column(name = "can_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
