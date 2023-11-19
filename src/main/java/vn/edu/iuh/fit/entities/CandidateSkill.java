@@ -18,7 +18,7 @@ public class CandidateSkill implements Serializable {
     @Column(name = "skill_level", nullable = false)
     private SkillLevel skillLevel;
     @Id
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.REFRESH,CascadeType.PERSIST})
     @JoinColumn(name = "skill_id")
     private Skill skill;
     @Id

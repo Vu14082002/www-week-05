@@ -6,6 +6,7 @@ import net.datafaker.Faker;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import vn.edu.iuh.fit.entities.Address;
 import vn.edu.iuh.fit.entities.Candidate;
 import vn.edu.iuh.fit.repositories.CandidateRepository;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -47,6 +49,23 @@ public class CandidateController {
         model.addAttribute("candidate",candidate);
         model.addAttribute("codes",codes);
         return "candidate/candidate-add-form";
+    }
+    @GetMapping("/update/{id}")
+    public  String showCandidateForm(@PathVariable("id") long id,Model model){
+        Faker faker = new Faker();
+        Candidate candidate = candidateRepository.findById(id).get();
+        List<CountryCode> codes = Arrays.stream(CountryCode.values()).toList();
+        System.out.println(candidate.getDob());
+        model.addAttribute("candidate",candidate);
+        model.addAttribute("codes",codes);
+        model.addAttribute("code",candidate.getAddress().getCountry().getName());
+        return "candidate/candidate-update-form";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") long id, Model model) {
+        candidateRepository.delete(candidateRepository.findById(id).get());
+        return "redirect:/admin/candidates";
     }
     @PostMapping("/save")
     public  String save(@ModelAttribute("candidate") Candidate candidate){

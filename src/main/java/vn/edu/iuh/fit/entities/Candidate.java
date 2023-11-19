@@ -27,9 +27,9 @@ public class Candidate {
     private Address address;
     @Column(columnDefinition = "varchar(15)", nullable = false, unique = true)
     private String phone;
-    @OneToMany(mappedBy = "candidate",cascade = {CascadeType.PERSIST, CascadeType.DETACH,CascadeType.REFRESH})
+    @OneToMany(mappedBy = "candidate",cascade = CascadeType.ALL)
     private List<CandidateSkill> candidateSkills;
-    @OneToMany(mappedBy = "candidate",cascade = {CascadeType.PERSIST, CascadeType.DETACH,CascadeType.REFRESH})
+    @OneToMany(mappedBy = "candidate",cascade = CascadeType.ALL)
     private List<Experience> experiences;
 
     public Candidate(long id) {

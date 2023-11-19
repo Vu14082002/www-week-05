@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Candidate ADD</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        select {
+            width: calc(100% - 10px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<h1 align="center">UPDATE CANDIDATE</h1>
+<form th:action="@{/admin/candidates/save}" th:object="${candidate}" method="post">
+    <div><label>Full name:</label> <input type="text" th:field="*{fullName}"/></div>
+
+    <div><label>Email:</label> <input type="text" th:field="*{email}"/></div>
+
+    <div><label>Phone :</label> <input type="text" th:field="*{phone}"/></div>
+    <div><label>Date of birth</label>
+        <input type="date" th:field="*{dob}"/>
+    </div>
+    <hr>
+    <div style="margin-bottom: 20px ; font-weight: bold ">Address</div>
+    <div><label>country :</label>
+        <select th:field="*{address.country}">
+            <th:block th:each=" e: ${codes} ">
+                <option th:value="${e}" th:text="${e}" th:selected="${e.name() == code}" ></option>
+            </th:block>
+        </select>
+    </div>
+    <div><label>City:</label>
+        <input type="text" th:field="*{address.city}"/>
+    </div>
+    <div><label>Number:</label>
+        <input type="number" th:field="*{address.number}"/>
+    </div>
+    <div><label>Street:</label>
+        <input type="text" th:field="*{address.street}"/>
+    </div>
+    <div><label>Zip code:</label>
+        <input type="number" th:field="*{address.zipcode}"/>
+    </div>
+
+    <input type="hidden" th:field="*{id}">
+    <input type="submit" value="add candidate">
+</form>
+</body>
+</html>
