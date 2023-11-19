@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Company View Detail</title>
+    <link rel="stylesheet" th:href="@{/css/table.css}">
+</head>
+<body>
+<h1>Information <span th:text="${company.name}"></span> Company Job</h1>
+<h2>Job Detail</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Skill</th>
+        <th>Description</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="e : ${company.jobs}">
+        <td th:text="${e.name}"></td>
+        <td>
+            <ul class="skill-list">
+                <li th:each="job : ${e.jobSkills}" th:text="${job}"></li>
+            </ul>
+        </td>
+        <td th:text="${e.description}"></td>
+        <td class="action-links">
+            <div><a th:href="@{/admin/jobs/{id}(id=${e.id})}">View Detail</a></div>
+            <div><a th:href="@{/admin/jobs/update/{id}(id=${e.id})}">Update</a></div>
+            <div><a th:href="@{/admin/jobs/delete/{id}(id=${e.id})}">Delete</a></div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

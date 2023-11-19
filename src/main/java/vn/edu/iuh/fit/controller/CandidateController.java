@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import net.datafaker.Faker;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,11 +12,9 @@ import vn.edu.iuh.fit.entities.Address;
 import vn.edu.iuh.fit.entities.Candidate;
 import vn.edu.iuh.fit.repositories.CandidateRepository;
 
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin/candidates")
@@ -27,7 +23,7 @@ public class CandidateController {
     private CandidateRepository candidateRepository;
     @GetMapping()
     public String getAll(@RequestParam(value = "page",defaultValue = "1") int page,
-                         @RequestParam(value = "size",defaultValue = "10") int size,
+                         @RequestParam(value = "size",defaultValue = "5") int size,
                          Model model) {
         Page<Candidate> candidatePage = candidateRepository.findAll(PageRequest.of(page-1, size));
         int totalPages = candidatePage.getTotalPages();
@@ -39,12 +35,17 @@ public class CandidateController {
         model.addAttribute("numpage",numpage);
         return "candidate/candidate-list";
     }
+
+    @GetMapping("/{id}")
+    public String getOne(@PathVariable("id") long id, Model model) {
+        Candidate candidate = candidateRepository.findById(id).get();
+        model.addAttribute("candidate",candidate);
+        return "candidate/candidate-detail";
+    }
     @GetMapping("/new")
     public  String showCandidateForm(Model model){
         Faker faker = new Faker();
         Candidate candidate = new Candidate();
-        Address address = new Address();
-        candidate.setAddress(address);
         List<CountryCode> codes = Arrays.stream(CountryCode.values()).toList();
         model.addAttribute("candidate",candidate);
         model.addAttribute("codes",codes);

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Company</title>
+    <link rel="stylesheet" th:href="@{/css/table.css}">
+</head>
+<body>
+<h1 align="center">Company list</h1>
+<h2 align="center"><a th:href="@{/admin/companies/new}">Add company</a></h2>
+<table width="80%" border="1" align="center">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>URL</th>
+        <th>Address</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="e : ${companyPage}">
+        <td th:text="${e.id}"></td>
+        <td th:text="${e.name}"></td>
+        <td th:text="${e.email}"></td>
+        <td th:text="${e.phone}"></td>
+        <td th:text="${e.webURL}"></td>
+        <td th:text="${e.address}"></td>
+        <td align="center">
+            <div align="center"><a th:href="@{/admin/companies/{id}(id=${e.id})}">View detail</a> </div>
+            <div align="center"><a th:href="@{/admin/companies/update/{id}(id=${e.id})}">Update</a></div>
+            <div align="center"><a th:href="@{/admin/companies/delete/{id}(id=${e.id})}">Delete</a> </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div align="center" style="margin: 50px " class="pagination">
+    <span>Page: </span>
+    <th:block th:each="e : ${pageNums}">
+       <a th:href="${'?page='+(e+1)}" th:text="${e+1}" style="margin:0px 20px; display: inline-block"> </a>
+    </th:block>
+</div>
+</body>
+</html>

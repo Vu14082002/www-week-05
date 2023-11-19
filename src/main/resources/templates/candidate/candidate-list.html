@@ -3,65 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Candidates</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f8f8;
-            margin: 0;
-            padding: 0;
-        }
-
-        h1, h2 {
-            text-align: center;
-            color: #333;
-        }
-
-        table {
-            width: 85%;
-            margin: 0 auto 20px;
-            border-collapse: collapse;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        th, td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: center;
-        }
-
-        thead {
-            background-color: #f0f0f0;
-        }
-
-        a {
-            text-decoration: none;
-            color: #007bff;
-            margin-right: 5px;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        div.pagination {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        div.pagination a {
-            margin: 0 5px;
-            padding: 5px 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            color: #333;
-            text-decoration: none;
-        }
-
-        div.pagination a.active {
-            background-color: #007bff;
-            color: #fff;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/table.css}">
 </head>
 <body>
 <h1 align="center">CANDIDATE LIST</h1>
@@ -97,10 +39,12 @@
     </tbody>
 
 </table>
-<div align="center" style="margin-bottom: 50px">
-    <th:block th:each="e: ${numpage}" >
-        <a th:href="${'?page='+(e+1)}" th:text="${e+1}" style="margin: 10px 15px"> </a>
+<div align="center" style="margin: 50px " class="pagination">
+    <span>Page: </span>
+    <th:block th:each="e : ${numpage}">
+        <a th:href="${'?page='+(e+1)}" th:text="${e+1}" style="margin:0px 20px; display: inline-block"> </a>
     </th:block>
 </div>
+
 </body>
 </html>

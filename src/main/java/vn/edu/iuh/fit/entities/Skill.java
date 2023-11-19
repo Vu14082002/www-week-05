@@ -11,7 +11,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@ToString
 public class Skill {
     @Id
     @Column(name = "skill_id")
@@ -36,5 +35,14 @@ public class Skill {
         this.type = type;
         this.skillName = skillName;
         this.skillDescription = skillDescription;
+    }
+
+    @Override
+    public String toString() {
+        return "Skill{" +
+                "type=" + type +
+                ", skillName='" + skillName + '\'' +
+                ", skillDescription='" + skillDescription + '\'' +
+                '}';
     }
 }

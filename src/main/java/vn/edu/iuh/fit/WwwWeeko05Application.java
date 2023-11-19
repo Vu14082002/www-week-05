@@ -52,7 +52,7 @@ public class WwwWeeko05Application {
 				skillRepository.save(skill);
 			}
 			// create Company;
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < 30; i++) {
 				Company company = new Company();
 				company.setAbout(faker.lorem().characters(15,20));
 				company.setName(faker.company().name());
@@ -67,7 +67,7 @@ public class WwwWeeko05Application {
 				companyRepository.save(company);
 			}
 			// Job skill
-			for (long i = 0; i < 20; i++) {
+			for (long i = 0; i < 30; i++) {
 				for (int j = 0; j < 2; j++) {
 					JobSkill jobSkill = new JobSkill();
 					jobSkill.setJob(jobRepository.findById(i+1).get());

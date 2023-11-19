@@ -1,7 +1,10 @@
 package vn.edu.iuh.fit.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import vn.edu.iuh.fit.enums.SkillLevel;
 import vn.edu.iuh.fit.ids.JobSkillID;
 
@@ -25,4 +28,12 @@ public class JobSkill {
     @ManyToOne
     @JoinColumn(name = "skill_id")
     private Skill skill;
+
+    @Override
+    public String toString() {
+        return
+                "{skillLevel=" + skillLevel +
+                        ", moreInfo='" + moreInfo + '\'' +
+                        ", skill=" + skill +"}\n";
+    }
 }

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Company</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Heading Styles */
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        /* Form Styles */
+        form {
+            width: 60%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form div {
+            margin-bottom: 15px;
+        }
+
+        form label {
+            display: block;
+            font-weight: bold;
+        }
+
+        form input[type="text"],
+        form input[type="number"],
+        form textarea,
+        form select {
+            width: calc(100% - 10px);
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        form input[type="submit"] {
+            width: auto;
+            padding: 8px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Select Dropdown Styles */
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+<h1 align="center">COMPANY FORM</h1>
+<form th:action="@{/admin/companies/save}" method="post" th:object="${company}">
+    <div>
+        <label>Name</label>
+        <input type="text" th:field="*{name}">
+    </div>
+    <div>
+        <label>Email</label>
+        <input type="text" th:field="*{email}">
+    </div>
+    <div>
+        <label>Phone</label>
+        <input type="text" th:field="*{phone}">
+    </div>
+    <div>
+        <label>URL</label>
+        <input type="text" th:field="*{webURL}">
+    </div>
+    <div>
+        <label>About</label>
+        <textarea th:value="*{about}"  th:text="*{about}">
+        </textarea>
+    </div>
+    <hr>
+    <div style="margin-top: 20px; font-weight: bold">Address</div>
+    <div><label>country :</label>
+        <select th:field="*{address.country}">
+            <th:block th:each=" e: ${codes} ">
+                <option th:value="${e}" th:text="${e}" th:selected="${e.name() == country}" ></option>
+            </th:block>
+        </select>
+    </div>
+    <div><label>City:</label>
+        <input type="text" th:field="*{address.city}"/>
+    </div>
+    <div><label>Number:</label>
+        <input type="number" th:field="*{address.number}"/>
+    </div>
+    <div><label>Street:</label>
+        <input type="text" th:field="*{address.street}"/>
+    </div>
+    <div><label>Zip code:</label>
+        <input type="number" th:field="*{address.zipcode}"/>
+    </div>
+    <input type="hidden" th:field="*{id}"/>
+    <input type="submit" value="Save">
+</form>
+</body>
+</html>
