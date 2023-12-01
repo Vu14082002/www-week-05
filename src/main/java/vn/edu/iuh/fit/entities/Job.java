@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -35,7 +36,13 @@ public class Job implements Serializable {
         this.company = company;
         this.description = description;
     }
-
+    public  void addJobSkill(JobSkill jobSkill){
+        if(this.jobSkills==null){
+            this.jobSkills = new ArrayList<>();
+        }
+        this.jobSkills.add(jobSkill);
+        jobSkill.setJob(this);
+    }
     @Override
     public String toString() {
         return "Job{" +

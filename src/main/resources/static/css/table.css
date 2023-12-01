@@ -43,8 +43,6 @@ div.pagination {
     margin-top: 20px;
 }
 
-
-
 div.pagination a.active {
     background-color: #007bff;
     color: #fff;

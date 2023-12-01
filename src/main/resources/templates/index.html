@@ -3,11 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .center-links {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* Adjust the height as needed */
+        }
+
+        .center-links div {
+            margin-bottom: 10px;
+        }
+
+        .center-links a {
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 1px solid #333;
+            color: #333;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+        .center-links a:hover {
+            background-color: #333;
+            color: #fff;
+        }
+        .center-links div {
+            margin: 15px 15px;
+        }
+    </style>
 </head>
 <body>
-    <div  align="center">
+    <div class="center-links">
         <div><a href="/admin/candidates">candidates</a></div>
         <div><a href="/admin/companies">company</a></div>
+        <div><a href="/admin/jobs">jobs</a></div>
     </div>
 </body>
 </html>

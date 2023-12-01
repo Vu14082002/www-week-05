@@ -1,10 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>JOB FORM</title>
+    <link rel="stylesheet" th:href="@{/css/job-form.css}">
+
 </head>
 <body>
-$END$
+<h1 align="center">JOB FORM</h1>
+<form th:action="@{/admin/jobs/save}" method="post" th:object="${job}">
+    <div>
+        <label>Company : </label>
+        <select th:field="*{company}">
+            <th:block th:each="e : ${companies}">
+                <option th:value="${e.getId()}" th:text="${e.getName()}"></option>
+            </th:block>
+        </select>
+    </div>
+    <div>
+        <label>Job name :</label>
+        <input type="text" th:field="*{name}">
+    </div>
+    <div>
+        <label>Job description</label>
+        <input type="text" th:field="*{description}">
+    </div>
+    <div class="skill-container">
+        <label class="skill-label">Skill need:</label>
+        <div class="checkbox-grid">
+            <div class="checkbox-item" th:each="e : ${skills}">
+                <div>
+                    <table >
+                        <tr >
+                            <td><input type="checkbox" th:name="selectedSkills" th:value="${e.getId()}"/></td>
+                            <td><span th:text="${e.getSkillName()}"></span></td>
+                            <td><input type="text" style="width: 100%" th:name="selectedSkills" th:value="${e.getId()}"/></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hidden-submit-container">
+        <input class="hidden-input" type="hidden" th:field="*{id}">
+        <input class="submit-button" type="submit" value="Save Job">
+    </div>
+</form>
 </body>
 </html>
